@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <view xmlns="http://jmix.io/schema/flowui/view"
       xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
-      title="msg://taskListView.title"
-      focusComponent="tasksDataGrid">
+      title="msg://qrtzJobDetailListView.title"
+      focusComponent="qrtzJobDetailsDataGrid">
     <data>
-        <collection id="tasksDc"
-                    class="com.company.jmixpmflowbase.entity.Task">
+        <collection id="qrtzJobDetailsDc"
+                    class="com.company.jmixpmflowbase.entity.QrtzJobDetail">
             <fetchPlan extends="_base">
-                <property name="project" fetchPlan="_base"/>
-                <property name="assignee" fetchPlan="_base"/>
+                <property name="id" fetchPlan="_instance_name"/>
             </fetchPlan>
-            <loader id="tasksDl" readOnly="true">
+            <loader id="qrtzJobDetailsDl" readOnly="true">
                 <query>
-                    <![CDATA[select e from Task_ e]]>
+                    <![CDATA[select e from QrtzJobDetail e]]>
                 </query>
             </loader>
         </collection>
@@ -26,23 +25,23 @@
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
-        <action id="discardAction" type="lookup_discard" icon="vaadin:arrow-circle-right" />
+        <action id="discardAction" type="lookup_discard"/>
     </actions>
     <layout>
         <genericFilter id="genericFilter"
-                       dataLoader="tasksDl">
+                       dataLoader="qrtzJobDetailsDl">
             <properties include=".*"/>
         </genericFilter>
         <hbox id="buttonsPanel" classNames="buttons-panel">
-            <button id="createBtn" action="tasksDataGrid.create" maxHeight="10em"/>
-            <button id="editBtn" action="tasksDataGrid.edit"/>
-            <button id="removeBtn" action="tasksDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="tasksDl"/>
+            <button id="createBtn" action="qrtzJobDetailsDataGrid.create"/>
+            <button id="editBtn" action="qrtzJobDetailsDataGrid.edit"/>
+            <button id="removeBtn" action="qrtzJobDetailsDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="qrtzJobDetailsDl"/>
         </hbox>
-        <dataGrid id="tasksDataGrid"
+        <dataGrid id="qrtzJobDetailsDataGrid"
                   width="100%"
                   minHeight="20em"
-                  dataContainer="tasksDc"
+                  dataContainer="qrtzJobDetailsDc"
                   columnReorderingAllowed="true">
             <actions>
                 <action id="create" type="list_create"/>
@@ -50,11 +49,12 @@
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns resizable="true">
-                <column property="name"/>
-                <column property="assignee"/>
-                <column property="startDate"/>
-                <column property="estimatedEfforts"/>
-                <column property="project"/>
+                <column property="description"/>
+                <column property="isDurable"/>
+                <column property="isNonconcurrent"/>
+                <column property="isUpdateData"/>
+                <column property="jobClassName"/>
+                <column property="requestsRecovery"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://qrtzJobDetailDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="qrtzJobDetailDc"
+                  class="com.company.jmixpmflowbase.entity.QrtzJobDetail">
+            <fetchPlan extends="_base">
+                <property name="id" fetchPlan="_instance_name"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="qrtzJobDetailDc">
+            <textField id="descriptionField" property="description"/>
+            <checkbox id="isDurableField" property="isDurable"/>
+            <checkbox id="isNonconcurrentField" property="isNonconcurrent"/>
+            <checkbox id="isUpdateDataField" property="isUpdateData"/>
+            <textField id="jobClassNameField" property="jobClassName"/>
+            <textField id="jobDataField" property="jobData"/>
+            <checkbox id="requestsRecoveryField" property="requestsRecovery"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://qrtzTriggerDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="qrtzTriggerDc"
+                  class="com.company.jmixpmflowbase.entity.QrtzTrigger">
+            <fetchPlan extends="_base">
+                <property name="id" fetchPlan="_instance_name"/>
+                <property name="qrtzJobDetail" fetchPlan="_instance_name"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="qrtzTriggerDc">
+            <textField id="calendarNameField" property="calendarName"/>
+            <textField id="descriptionField" property="description"/>
+            <textField id="endTimeField" property="endTime"/>
+            <textField id="jobDataField" property="jobData"/>
+            <textField id="misfireInstrField" property="misfireInstr"/>
+            <textField id="nextFireTimeField" property="nextFireTime"/>
+            <textField id="prevFireTimeField" property="prevFireTime"/>
+            <textField id="priorityField" property="priority"/>
+            <entityPicker id="qrtzJobDetailField" property="qrtzJobDetail">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="startTimeField" property="startTime"/>
+            <textField id="triggerStateField" property="triggerState"/>
+            <textField id="triggerTypeField" property="triggerType"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

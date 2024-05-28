@@ -39,6 +39,7 @@ public class Task {
     @Column(name = "ESTIMATED_EFFORTS")
     private Integer estimatedEfforts;
 
+
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @JoinColumn(name = "PROJECT_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
